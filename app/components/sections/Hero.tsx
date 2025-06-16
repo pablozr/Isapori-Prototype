@@ -83,6 +83,24 @@ export default function Hero() {
 
   return (
     <section className="hero" id="home">
+      {/* Hero Video Background */}
+      <video 
+        className="hero-video" 
+        autoPlay 
+        muted 
+        loop 
+        playsInline
+        preload="metadata"
+        poster="/66c35aa4f786c505441be010_ContactImage-p-2000.avif"
+      >
+        <source src="/668e67dd7c9c8d8287160b37_66a64cdd662062b2ef4cdfe9_IsaporiVideo (1)-transcode.mp4" type="video/mp4" />
+        {/* Fallback para navegadores que não suportam vídeo */}
+        Seu navegador não suporta vídeo HTML5.
+      </video>
+      
+      {/* Video Overlay */}
+      <div className="hero-video-overlay"></div>
+      
       {/* Premium Floating Elements */}
       <div className="premium-particles">
         <div className="premium-particle premium-particle-1"></div>

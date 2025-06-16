@@ -585,7 +585,36 @@ header.scrolled .header-inner {
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--noir-supreme) 0%, var(--noir-doux) 100%);
-    overflow: visible;
+    overflow: hidden;
+}
+
+/* Hero Video Background */
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg, 
+        rgba(10, 9, 8, 0.6) 0%, 
+        rgba(26, 24, 22, 0.4) 50%, 
+        rgba(10, 9, 8, 0.7) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
 }
 
 .hero::before {
@@ -597,7 +626,7 @@ header.scrolled .header-inner {
     bottom: 0;
     background: radial-gradient(circle at 20% 80%, rgba(201, 169, 97, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(201, 169, 97, 0.1) 0%, transparent 50%);
-    z-index: 1;
+    z-index: 2;
 }
 
 /* Premium Particles System */
@@ -609,7 +638,7 @@ header.scrolled .header-inner {
     height: 100%;
     overflow: hidden;
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
 }
 
 .premium-particle {
@@ -689,7 +718,7 @@ header.scrolled .header-inner {
     height: 100%;
     overflow: hidden;
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
 }
 
 .geometric-circle {
@@ -810,7 +839,7 @@ header.scrolled .header-inner {
     left: 60px;
     right: 60px;
     bottom: 60px;
-    z-index: 2;
+    z-index: 3;
     pointer-events: none;
 }
 
@@ -869,11 +898,13 @@ header.scrolled .header-inner {
     padding: 0 80px;
     width: 100%;
     overflow: visible;
+    position: relative;
+    z-index: 10;
 }
 
 .hero-content {
     text-align: center;
-    z-index: 2;
+    z-index: 10;
     position: relative;
     max-width: none;
     margin: 0 auto;
@@ -895,10 +926,11 @@ header.scrolled .header-inner {
     position: relative;
     display: inline-block;
     font-family: 'Inter', sans-serif;
-    text-shadow: 0 0 20px rgba(201, 169, 97, 0.2);
+    text-shadow: 0 0 20px rgba(201, 169, 97, 0.5);
     opacity: 0;
     transform: translateY(-30px);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 15;
 }
 
 .hero-eyebrow::before,
@@ -929,12 +961,13 @@ header.scrolled .header-inner {
     margin-bottom: 3rem;
     animation: fadeInUp 1.2s ease 0.7s both;
     position: relative;
-    text-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
     overflow: visible;
     padding: 0;
     margin: 0 auto 3rem auto;
     width: fit-content;
     text-align: center;
+    z-index: 15;
 }
 
 .hero-title-main {
@@ -946,7 +979,7 @@ header.scrolled .header-inner {
     opacity: 0;
     transform: translateY(50px);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    background: linear-gradient(135deg, var(--blanc-pur) 0%, rgba(255, 255, 255, 0.8) 100%);
+    background: linear-gradient(135deg, var(--blanc-pur) 0%, rgba(255, 255, 255, 0.9) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -958,6 +991,8 @@ header.scrolled .header-inner {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    z-index: 15;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
 .hero-title-sub {
@@ -1006,13 +1041,16 @@ header.scrolled .header-inner {
     letter-spacing: 1px;
     line-height: 1.8;
     margin-bottom: 5rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.9);
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 15;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .hero-buttons {
@@ -1023,6 +1061,8 @@ header.scrolled .header-inner {
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 15;
 }
 
 .btn-luxury {
@@ -1336,6 +1376,20 @@ header.scrolled .header-inner {
     
     .hero .container {
         padding: 0 30px;
+    }
+    
+    /* Otimização do vídeo para mobile */
+    .hero-video {
+        opacity: 0.6;
+    }
+    
+    .hero-video-overlay {
+        background: linear-gradient(
+            135deg, 
+            rgba(10, 9, 8, 0.8) 0%, 
+            rgba(26, 24, 22, 0.7) 50%, 
+            rgba(10, 9, 8, 0.9) 100%
+        );
     }
 }
 
