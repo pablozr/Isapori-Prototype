@@ -1,27 +1,15 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Loader from './components/Loader'
-import { LanguageProvider } from './contexts/LanguageContext'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+import '../globals.css'
+import HeaderIframe from '../components/HeaderIframe'
+import Loader from '../components/Loader'
+import { LanguageProvider } from '../contexts/LanguageContext'
 
 export const metadata: Metadata = {
-  title: 'iSapori - Ristorante Italiano',
-  description: 'Un voyage sensoriel où chaque plat raconte une histoire de tradition, passion et excellence culinaire au cœur de Genève',
+  title: 'Commander - iSapori',
+  description: 'Commandez vos plats préférés chez iSapori - Ristorante Italiano',
 }
 
-export default function RootLayout({
+export default function CommanderLayout({
   children,
 }: {
   children: React.ReactNode
@@ -36,12 +24,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
         <LanguageProvider>
           <Loader />
-          <Header />
+          <HeaderIframe />
           {children}
-          <Footer />
+          {/* Footer removido intencionalmente para páginas iframe */}
         </LanguageProvider>
       </body>
     </html>

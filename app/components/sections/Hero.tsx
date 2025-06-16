@@ -143,10 +143,10 @@ export default function Hero() {
             {t('hero.description')}
           </p>
           <div className="hero-buttons">
-            <a href="https://isaporigeneve.wixsite.com/isapori" target="_blank" rel="noopener noreferrer" className="btn-luxury">
+            <a href="/commander" className="btn-luxury">
               <span>{t('hero.order')}</span>
             </a>
-            <a href="https://isaporigeneve.wixsite.com/isapori/reservations" target="_blank" rel="noopener noreferrer" className="btn-minimal">
+            <a href="/reserver" className="btn-minimal">
               <span>{t('hero.reserve')}</span>
             </a>
           </div>

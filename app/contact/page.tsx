@@ -1,9 +1,55 @@
 'use client'
 
 import { useLanguage } from '../contexts/LanguageContext'
+import { useState } from 'react'
 
 export default function ContactPage() {
   const { t } = useLanguage()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    setErrorMessage('')
+
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      firstName: formData.get('firstName') as string,
+      lastName: formData.get('lastName') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string,
+      subject: formData.get('subject') as string,
+      message: formData.get('message') as string,
+    }
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        // Limpar formulário
+        e.currentTarget.reset()
+      } else {
+        const errorData = await response.json()
+        setSubmitStatus('error')
+        setErrorMessage(errorData.error || 'Erreur lors de l\'envoi du message')
+      }
+    } catch (error) {
+      setSubmitStatus('error')
+      setErrorMessage('Erreur de connexion. Veuillez réessayer.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <main className="contact-page">
@@ -48,30 +94,30 @@ export default function ContactPage() {
                   <h2>{t('contact.form_title')}</h2>
                   <p>{t('contact.form_subtitle')}</p>
                   
-                  <form className="contact-form">
+                  <form className="contact-form" onSubmit={handleSubmit}>
                     <div className="form-row">
                       <div className="form-group">
-                        <input type="text" id="firstName" required />
+                        <input type="text" id="firstName" name="firstName" required />
                         <label htmlFor="firstName">{t('contact.first_name')}</label>
                       </div>
                       <div className="form-group">
-                        <input type="text" id="lastName" required />
+                        <input type="text" id="lastName" name="lastName" required />
                         <label htmlFor="lastName">{t('contact.last_name')}</label>
                       </div>
                     </div>
-                    
+
                     <div className="form-group">
-                      <input type="email" id="email" required />
+                      <input type="email" id="email" name="email" required />
                       <label htmlFor="email">{t('contact.email')}</label>
                     </div>
-                    
+
                     <div className="form-group">
-                      <input type="tel" id="phone" />
+                      <input type="tel" id="phone" name="phone" />
                       <label htmlFor="phone">{t('contact.phone')}</label>
                     </div>
-                    
+
                     <div className="form-group">
-                      <select id="subject" required>
+                      <select id="subject" name="subject" required>
                         <option value="">{t('contact.subject_placeholder')}</option>
                         <option value="reservation">{t('contact.subject_reservation')}</option>
                         <option value="event">{t('contact.subject_event')}</option>
@@ -80,14 +126,31 @@ export default function ContactPage() {
                       </select>
                       <label htmlFor="subject">{t('contact.subject')}</label>
                     </div>
-                    
+
                     <div className="form-group">
-                      <textarea id="message" rows={5} required></textarea>
+                      <textarea id="message" name="message" rows={5} required></textarea>
                       <label htmlFor="message">{t('contact.message')}</label>
                     </div>
-                    
-                    <button type="submit" className="contact-submit-btn">
-                      {t('contact.submit')}
+
+                    {/* Status Messages */}
+                    {submitStatus === 'success' && (
+                      <div className="form-success-message">
+                        ✅ Message envoyé avec succès ! Nous vous recontacterons prochainement.
+                      </div>
+                    )}
+
+                    {submitStatus === 'error' && (
+                      <div className="form-error-message">
+                        ❌ {errorMessage}
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      className="contact-submit-btn"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Envoi en cours...' : t('contact.submit')}
                     </button>
                   </form>
                 </div>

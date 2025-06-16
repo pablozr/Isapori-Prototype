@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
 import LanguageSelector from './LanguageSelector'
 
-export default function Header() {
+export default function HeaderIframe() {
   const { t } = useLanguage()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -27,21 +27,16 @@ export default function Header() {
       }
     }
 
-    const updateHeader = () => {
-      const header = document.getElementById('header')
-      if (window.scrollY > 100) {
-        header?.classList.add('scrolled')
-      } else {
-        header?.classList.remove('scrolled')
-      }
+    // Para páginas iframe, sempre manter o header no estilo "scrolled" (preto)
+    const header = document.getElementById('header-iframe')
+    if (header) {
+      header.classList.add('scrolled')
     }
 
     window.addEventListener('scroll', updateScrollProgress)
-    window.addEventListener('scroll', updateHeader)
 
     return () => {
       window.removeEventListener('scroll', updateScrollProgress)
-      window.removeEventListener('scroll', updateHeader)
     }
   }, [])
 
@@ -50,19 +45,19 @@ export default function Header() {
       {/* Scroll Progress */}
       <div className="scroll-progress"></div>
 
-      {/* Header Supreme */}
-      <header id="header">
+      {/* Header Supreme - Sempre no estilo preto para páginas iframe */}
+      <header id="header-iframe" className="header-iframe scrolled">
         <div className="container">
           <div className="header-inner">
-            <a href="#home" className="logo">
+            <a href="/" className="logo">
               <img src="/669fcd4c0c0dbd743aad047a_Untitled design (1).svg" alt="ISapori" className="logo-svg" />
               <span className="logo-text">iSapori</span>
             </a>
             <nav>
               <ul className={`nav-menu ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-                <li><a href="#home" onClick={closeMobileMenu}>{t('nav.home')}</a></li>
+                <li><a href="/" onClick={closeMobileMenu}>{t('nav.home')}</a></li>
                 <li><a href="/commander" onClick={closeMobileMenu}>{t('nav.order')}</a></li>
-                <li><a href="#menu" onClick={closeMobileMenu}>{t('nav.menu')}</a></li>
+                <li><a href="/#menu" onClick={closeMobileMenu}>{t('nav.menu')}</a></li>
                 <li><a href="/contact" onClick={closeMobileMenu}>{t('nav.contact')}</a></li>
               </ul>
             </nav>
@@ -86,9 +81,9 @@ export default function Header() {
               <button className="mobile-close-btn" onClick={closeMobileMenu}>✕</button>
             </div>
             <nav className="mobile-nav">
-              <a href="#home" onClick={closeMobileMenu}>{t('nav.home')}</a>
+              <a href="/" onClick={closeMobileMenu}>{t('nav.home')}</a>
               <a href="/commander" onClick={closeMobileMenu}>{t('nav.order')}</a>
-              <a href="#menu" onClick={closeMobileMenu}>{t('nav.menu')}</a>
+              <a href="/#menu" onClick={closeMobileMenu}>{t('nav.menu')}</a>
               <a href="/contact" onClick={closeMobileMenu}>{t('nav.contact')}</a>
             </nav>
             <div className="mobile-actions">
@@ -102,4 +97,4 @@ export default function Header() {
       )}
     </>
   )
-} 
+}

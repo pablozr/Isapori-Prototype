@@ -58,10 +58,10 @@ export default function Contact() {
             <p className="reservation-subtitle">{t('contact.reserve_subtitle')}</p>
           </div>
           <div className="reservation-buttons">
-            <a href="https://isaporigeneve.wixsite.com/isapori/reservations" target="_blank" rel="noopener noreferrer" className="form-button-luxury">
+            <a href="/reserver" className="form-button-luxury">
               {t('contact.reserve_table')}
             </a>
-            <a href="https://isaporigeneve.wixsite.com/isapori" target="_blank" rel="noopener noreferrer" className="form-button-luxury" style={{background: 'transparent', border: '2px solid var(--or-imperial)', color: 'var(--or-imperial)', marginTop: '1rem'}}>
+            <a href="/commander" className="form-button-luxury" style={{background: 'transparent', border: '2px solid var(--or-imperial)', color: 'var(--or-imperial)', marginTop: '1rem'}}>
               {t('contact.order_online')}
             </a>
           </div>

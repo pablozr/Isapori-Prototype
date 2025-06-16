@@ -45,8 +45,8 @@ export default function Footer() {
         <div className="footer-menu">
           <h4>{t('footer.menu_label')}</h4>
           <ul>
-            <li><a href="https://isaporigeneve.wixsite.com/isapori/reservations" target="_blank" rel="noopener noreferrer">{t('footer.reserve')}</a></li>
-            <li><a href="https://isaporigeneve.wixsite.com/isapori" target="_blank" rel="noopener noreferrer">{t('footer.order')}</a></li>
+            <li><a href="/reserver">{t('footer.reserve')}</a></li>
+            <li><a href="/commander">{t('footer.order')}</a></li>
             <li><a href="#contact">{t('footer.contact')}</a></li>
           </ul>
         </div>
@@ -54,7 +54,7 @@ export default function Footer() {
       
       <div className="footer-bottom-luxury">
         <p>{t('footer.rights')}</p>
-        <p>{t('footer.made_by')} <a href="mailto:contact@765digital.com">765digital - contact@765digital.com</a></p>
+        <p>{t('footer.made_by')} <a href="mailto:codebrch@gmail.com">CodeBR - codebrch@gmail.com</a></p>
       </div>
     </footer>
   )
