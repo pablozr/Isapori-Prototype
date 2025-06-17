@@ -54,15 +54,15 @@ export default function Header() {
       <header id="header">
         <div className="container">
           <div className="header-inner">
-            <a href="#home" className="logo">
+            <a href="/" className="logo">
               <img src="/669fcd4c0c0dbd743aad047a_Untitled design (1).svg" alt="ISapori" className="logo-svg" />
               <span className="logo-text">iSapori</span>
             </a>
             <nav>
               <ul className={`nav-menu ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-                <li><a href="#home" onClick={closeMobileMenu}>{t('nav.home')}</a></li>
+                <li><a href="/" onClick={closeMobileMenu}>{t('nav.home')}</a></li>
                 <li><a href="/commander" onClick={closeMobileMenu}>{t('nav.order')}</a></li>
-                <li><a href="#menu" onClick={closeMobileMenu}>{t('nav.menu')}</a></li>
+                <li><a href="/menu" onClick={closeMobileMenu}>{t('nav.menu')}</a></li>
                 <li><a href="/contact" onClick={closeMobileMenu}>{t('nav.contact')}</a></li>
               </ul>
             </nav>
@@ -86,9 +86,9 @@ export default function Header() {
               <button className="mobile-close-btn" onClick={closeMobileMenu}>✕</button>
             </div>
             <nav className="mobile-nav">
-              <a href="#home" onClick={closeMobileMenu}>{t('nav.home')}</a>
+              <a href="/" onClick={closeMobileMenu}>{t('nav.home')}</a>
               <a href="/commander" onClick={closeMobileMenu}>{t('nav.order')}</a>
-              <a href="#menu" onClick={closeMobileMenu}>{t('nav.menu')}</a>
+              <a href="/menu" onClick={closeMobileMenu}>{t('nav.menu')}</a>
               <a href="/contact" onClick={closeMobileMenu}>{t('nav.contact')}</a>
             </nav>
             <div className="mobile-actions">
